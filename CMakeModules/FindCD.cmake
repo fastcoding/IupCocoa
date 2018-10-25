@@ -11,10 +11,12 @@ FIND_LIBRARY(CD_LIBRARY
 		cd
 	PATH_SUFFIXES 
 		Linux32_64
+        MacOS1014
 	PATHS
 		$ENV{CD_DIR}
 		$ENV{CD_DIR}/lib
 		$ENV{CD_DIR}/lib/Linux32_64
+        $ENV{CD_DIR}/lib/MacOS1014
 )
 
 INCLUDE(FindPackageHandleStandardArgs)

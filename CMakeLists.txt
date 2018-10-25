@@ -15,6 +15,12 @@
 if(APPLE)
 	# We're using the new Mac RPATH policy.
 	CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+    execute_process(COMMAND xcrun --show-sdk-path
+        OUTPUT_VARIABLE _sysroot_nl
+        RESULT_VARIABLE _sdkpath
+    )
+    string(STRIP ${_sysroot_nl} CMAKE_OSX_SYSROOT)
+    set(CMAKE_C_SYSROOT_FLAG "-isysroot ${CMAKE_OSX_SYSROOT}")
 else()
 	# Ubuntu 12.04 LTS ships 2.8.7
 	CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
@@ -100,7 +106,6 @@ ELSEIF(APPLE)
 		OPTION(IUP_OPTION_GTK3 "Use GTK3 backend" OFF)
 		OPTION(IUP_OPTION_MOTIF "Use Motif backend" OFF)
 		OPTION(IUP_OPTION_WIN32 "Use Win32 backend" OFF)
-
 	ENDIF()
 
 ELSEIF(ANDROID)
@@ -248,19 +253,18 @@ ENDIF()
 OPTION(IUPIMGLIB_OPTION_USE_IMGLIB_LARGE "Include images larger than 48x48 (inclusive) for imglib" ON)
 
 
-FIND_PACKAGE(CD QUIET)
-IF(CD_FOUND)
-	SET(IUP_USE_CD 1)
-	MESSAGE("CD found")
-ELSE()
-	MESSAGE("CD not found")
-ENDIF()
+#FIND_PACKAGE(CD QUIET)
+#IF(CD_FOUND)
+#	SET(IUP_USE_CD 1)
+#	MESSAGE("CD found")
+#ELSE()
+#	MESSAGE("CD not found")
+#ENDIF()
 
 
 SET(IUP_USE_LUA 0)
 IF(IUP_OPTION_LUA)
-message("init LUA_LIBRARY: ${LUA_LIBRARY}")
-message("init LUA_INCLUDE_DIR: ${LUA_INCLUDE_DIR}")
+
 	MESSAGE("finding lua package")
 	FIND_PACKAGE(Lua QUIET)
 	IF(LUA_FOUND)
@@ -269,6 +273,8 @@ message("init LUA_INCLUDE_DIR: ${LUA_INCLUDE_DIR}")
 	ELSE()
 		MESSAGE("Lua not found")
 	ENDIF()
+    message("LUA_LIBRARY: ${LUA_LIBRARY}")
+    message("LUA_INCLUDE_DIR: ${LUA_INCLUDE_DIR}")
 ENDIF()
 
 # RPATH stuff. This MUST be set before any targets that use it are declared.
@@ -941,7 +947,8 @@ ELSEIF(IUP_USE_COCOA)
 #		${CMAKE_SOURCE_DIR}/src/cocoa/iupmac_info.m
 		${CMAKE_SOURCE_DIR}/src/cocoa/iupmac_key.m
 		${CMAKE_SOURCE_DIR}/src/cocoa/iupmac_keycodes.h
-
+        ${CMAKE_SOURCE_DIR}/src/cocoa/IupCocoaTreeToggleTableCellView.m
+        ${CMAKE_SOURCE_DIR}/src/cocoa/IupCocoaTreeToggleTableCellView.h
 		# Stop gap
 #		${CMAKE_SOURCE_DIR}/src/gtk/iupmac_help.c
 	)
