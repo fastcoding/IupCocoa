@@ -1,0 +1,67 @@
+$(OBJDIR)/cd.o: cd.c ../include/cd.h ../include/wd.h ../include/wd_old.h \
+  ../include/cd_private.h ../include/cdirgb.h
+$(OBJDIR)/wd.o: wd.c ../include/cd.h ../include/wd.h ../include/wd_old.h \
+  ../include/cd_private.h
+$(OBJDIR)/wdhdcpy.o: wdhdcpy.c ../include/cd.h ../include/wd.h ../include/wd_old.h
+$(OBJDIR)/rgb2map.o: rgb2map.c ../include/cd.h
+$(OBJDIR)/cd_vectortext.o: cd_vectortext.c ../include/cd.h ../include/wd.h \
+  ../include/wd_old.h ../include/cd_private.h
+$(OBJDIR)/cd_active.o: cd_active.c ../include/cd.h ../include/wd.h \
+  ../include/wd_old.h ../include/cd_old.h
+$(OBJDIR)/cd_attributes.o: cd_attributes.c ../include/cd.h ../include/cd_private.h
+$(OBJDIR)/cd_bitmap.o: cd_bitmap.c ../include/cd.h ../include/cdirgb.h \
+  ../include/cd_private.h
+$(OBJDIR)/cd_image.o: cd_image.c ../include/cd.h ../include/cd_private.h
+$(OBJDIR)/cd_primitives.o: cd_primitives.c ../include/cd.h ../include/cd_private.h
+$(OBJDIR)/cd_text.o: cd_text.c ../include/cd.h ../include/cd_private.h
+$(OBJDIR)/base64.o: svg/base64.c svg/base64.h
+$(OBJDIR)/lodepng.o: svg/lodepng.c svg/lodepng.h
+$(OBJDIR)/cdsvg.o: svg/cdsvg.c ../include/cd.h ../include/wd.h ../include/wd_old.h \
+  ../include/cd_private.h ../include/cdsvg.h svg/lodepng.h svg/base64.h
+$(OBJDIR)/cd_intcgm.o: intcgm/cd_intcgm.c ../include/cd.h ../include/cdcgm.h \
+  intcgm/cgm_play.h
+$(OBJDIR)/cgm_bin_get.o: intcgm/cgm_bin_get.c intcgm/cgm_types.h intcgm/cgm_play.h \
+  intcgm/cgm_list.h intcgm/cgm_bin_get.h
+$(OBJDIR)/cgm_bin_parse.o: intcgm/cgm_bin_parse.c intcgm/cgm_types.h \
+  intcgm/cgm_play.h intcgm/cgm_list.h intcgm/cgm_bin_get.h
+$(OBJDIR)/cgm_list.o: intcgm/cgm_list.c intcgm/cgm_list.h
+$(OBJDIR)/cgm_play.o: intcgm/cgm_play.c intcgm/cgm_types.h intcgm/cgm_play.h \
+  intcgm/cgm_list.h
+$(OBJDIR)/cgm_sism.o: intcgm/cgm_sism.c intcgm/cgm_types.h intcgm/cgm_play.h \
+  intcgm/cgm_list.h
+$(OBJDIR)/cgm_txt_get.o: intcgm/cgm_txt_get.c intcgm/cgm_types.h intcgm/cgm_play.h \
+  intcgm/cgm_list.h intcgm/cgm_txt_get.h
+$(OBJDIR)/cgm_txt_parse.o: intcgm/cgm_txt_parse.c intcgm/cgm_types.h \
+  intcgm/cgm_play.h intcgm/cgm_list.h intcgm/cgm_txt_get.h
+$(OBJDIR)/cddgn.o: drv/cddgn.c ../include/cd.h ../include/cd_private.h \
+  ../include/cddgn.h
+$(OBJDIR)/cdcgm.o: drv/cdcgm.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdcgm.h drv/cgm.h
+$(OBJDIR)/cgm.o: drv/cgm.c drv/cgm.h
+$(OBJDIR)/cddxf.o: drv/cddxf.c ../include/cd.h ../include/cd_private.h \
+  ../include/cddxf.h
+$(OBJDIR)/cdmf.o: drv/cdmf.c ../include/cd.h ../include/wd.h ../include/wd_old.h \
+  ../include/cd_private.h ../include/cdmf.h ../include/cdmf_private.h
+$(OBJDIR)/cdps.o: drv/cdps.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdps.h
+$(OBJDIR)/cdpicture.o: drv/cdpicture.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdpicture.h
+$(OBJDIR)/cddebug.o: drv/cddebug.c ../include/cd.h ../include/wd.h \
+  ../include/wd_old.h ../include/cd_private.h ../include/cddebug.h
+$(OBJDIR)/cdpptx.o: drv/cdpptx.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdpptx.h drv/pptx.h
+$(OBJDIR)/pptx.o: drv/pptx.c ../include/cd.h ../include/cd_private.h svg/lodepng.h \
+  drv/pptx.h
+$(OBJDIR)/ioapi.o: minizip/ioapi.c minizip/ioapi.h
+$(OBJDIR)/minizip.o: minizip/minizip.c minizip/zip.h minizip/ioapi.h
+$(OBJDIR)/zip.o: minizip/zip.c minizip/zip.h minizip/ioapi.h
+$(OBJDIR)/miniunzip.o: minizip/miniunzip.c minizip/unzip.h minizip/ioapi.h
+$(OBJDIR)/unzip.o: minizip/unzip.c minizip/unzip.h minizip/ioapi.h
+$(OBJDIR)/cdfontex.o: sim/cdfontex.c ../include/cd.h ../include/cd_private.h
+$(OBJDIR)/sim_primitives.o: sim/sim_primitives.c ../include/cd.h \
+  ../include/cd_private.h
+$(OBJDIR)/cd0wmf.o: drv/cd0wmf.c ../include/cd.h ../include/cdwmf.h
+$(OBJDIR)/cd0prn.o: drv/cd0prn.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdprint.h
+$(OBJDIR)/cd0emf.o: drv/cd0emf.c ../include/cd.h ../include/cd_private.h \
+  ../include/cdemf.h

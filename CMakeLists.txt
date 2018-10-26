@@ -15,12 +15,6 @@
 if(APPLE)
 	# We're using the new Mac RPATH policy.
 	CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
-    execute_process(COMMAND xcrun --show-sdk-path
-        OUTPUT_VARIABLE _sysroot_nl
-        RESULT_VARIABLE _sdkpath
-    )
-    string(STRIP ${_sysroot_nl} CMAKE_OSX_SYSROOT)
-    set(CMAKE_C_SYSROOT_FLAG "-isysroot ${CMAKE_OSX_SYSROOT}")
 else()
 	# Ubuntu 12.04 LTS ships 2.8.7
 	CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
@@ -28,6 +22,15 @@ endif()
 
 if(POLICY CMP0054)
 	cmake_policy(SET CMP0054 NEW)
+endif()
+if(APPLE)
+    execute_process(COMMAND xcrun --show-sdk-path
+        OUTPUT_VARIABLE _sysroot_nl
+        RESULT_VARIABLE _sdkpath
+    )
+    string(STRIP ${_sysroot_nl} CMAKE_OSX_SYSROOT)
+    set(CMAKE_C_SYSROOT_FLAG "-isysroot ${CMAKE_OSX_SYSROOT}")
+    message(use sysroot: ${CMAKE_OSX_SYSROOT})
 endif()
 
 PROJECT(IUP)
@@ -38,7 +41,7 @@ INCLUDE(CheckFunctionExists)
 #INCLUDE(CPack)
 
 # By default, we'll exclude the tests from the ALL target. But for convenience, we also will provide a testsiup aggregate target.
-OPTION(IUP_BUILD_TESTS "Build tests with ALL target" OFF)
+OPTION(IUP_BUILD_TESTS "Build tests with ALL target" ON)
 SET(IUP_TESTS_CUSTOM_TARGET_NAME "testsiup")
 ADD_CUSTOM_TARGET(${IUP_TESTS_CUSTOM_TARGET_NAME})
 
@@ -253,13 +256,13 @@ ENDIF()
 OPTION(IUPIMGLIB_OPTION_USE_IMGLIB_LARGE "Include images larger than 48x48 (inclusive) for imglib" ON)
 
 
-#FIND_PACKAGE(CD QUIET)
-#IF(CD_FOUND)
-#	SET(IUP_USE_CD 1)
-#	MESSAGE("CD found")
-#ELSE()
-#	MESSAGE("CD not found")
-#ENDIF()
+FIND_PACKAGE(CD QUIET)
+IF(CD_FOUND)
+	SET(IUP_USE_CD 1)
+	MESSAGE("CD found")
+ELSE()
+	MESSAGE("CD not found")
+ENDIF()
 
 
 SET(IUP_USE_LUA 0)

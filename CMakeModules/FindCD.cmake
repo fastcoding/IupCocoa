@@ -2,6 +2,7 @@ FIND_PATH(CD_INCLUDE_DIR cd.h
 	PATH_SUFFIXES 
 		cd
 	PATHS
+        ${CMAKE_SOURCE_DIR}/cd
 		$ENV{CD_DIR}
 		$ENV{CD_DIR}/include
 )

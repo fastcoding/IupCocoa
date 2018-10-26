@@ -63,7 +63,7 @@ if(APPLE)
 	else()
 
 		# The generic "macosx" is used to trigger the "Latest" setting. The full SDK path which CMake has been trying to do actually breaks functionality in subtle ways.
-		set(CMAKE_OSX_SYSROOT macosx CACHE PATH "The product will be built against the headers and libraries located inside the indicated SDK." FORCE)
+        #set(CMAKE_OSX_SYSROOT macosx CACHE PATH "The product will be built against the headers and libraries located inside the indicated SDK." FORCE)
 
 		set_xcode_property(${_EXE_NAME} GCC_GENERATE_DEBUGGING_SYMBOLS[variant=Debug] YES)
 		set_xcode_property(${_EXE_NAME} GCC_GENERATE_DEBUGGING_SYMBOLS[variant=MinSizeRel] YES)

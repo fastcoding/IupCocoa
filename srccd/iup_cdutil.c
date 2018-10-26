@@ -57,7 +57,7 @@ void cdIupCalcShadows(long bgcolor, long *light_shadow, long *mid_shadow, long *
     else             b = bg_b + (255-max);
   }
 
-  if (light_shadow) *light_shadow = cdEncodeColor((unsigned char)r, (unsigned char)g, (unsigned char)b); 
+  if (light_shadow) *light_shadow = cdEncodeColor((unsigned char)r, (unsigned char)g, (unsigned char)b);
 
   /* dark_shadow */
   r = bg_r - 128;
@@ -67,7 +67,7 @@ void cdIupCalcShadows(long bgcolor, long *light_shadow, long *mid_shadow, long *
   if (g < 0) g = 0;
   if (b < 0) b = 0;
 
-  if (dark_shadow) *dark_shadow = cdEncodeColor((unsigned char)r, (unsigned char)g, (unsigned char)b); 
+  if (dark_shadow) *dark_shadow = cdEncodeColor((unsigned char)r, (unsigned char)g, (unsigned char)b);
 
   /*   mid_shadow = (dark_shadow+bgcolor)/2    */
   if (mid_shadow) *mid_shadow = cdEncodeColor((unsigned char)((bg_r+r)/2), (unsigned char)((bg_g+g)/2), (unsigned char)((bg_b+b)/2));
@@ -284,8 +284,8 @@ void cdIupDrawImage(cdCanvas *canvas, Ihandle *image, int x, int y, int w, int h
     long palette[256];
     iUtilInitPalette(image, palette, bgcolor, make_inactive);
 
-    cdCanvasPutImageRectMap(canvas, width, height, 
-                            image_buffer, palette, 
+    cdCanvasPutImageRectMap(canvas, width, height,
+                            image_buffer, palette,
                             x, y, w, h, 0, 0, 0, 0);
   }
   else if (depth==3)
@@ -323,15 +323,15 @@ void IupCdSetFont(Ihandle* ih, cdCanvas *canvas, const char* font)
 
 void IupCdDrawFocusRect(Ihandle* ih, cdCanvas *canvas, int x1, int y1, int x2, int y2)
 {
-  int y, x, w, h;
+  /*int y, x, w, h;
 
-#ifdef WIN32
+//#ifdef WIN32
   void* gc = cdCanvasGetAttribute(canvas, "HDC");
   if (!gc)
-    gc = cdCanvasGetAttribute(canvas, "GC");  /* for Cairo running in Windows */
-#else
-  void* gc = cdCanvasGetAttribute(canvas, "GC");  /* works for X11, GDK and Cairo */
-#endif
+    gc = cdCanvasGetAttribute(canvas, "GC");  // for Cairo running in Windows
+//#else
+  void* gc = cdCanvasGetAttribute(canvas, "GC");  // works for X11, GDK and Cairo
+//#endif
 
   cdCanvasUpdateYAxis(canvas, &y1);
   cdCanvasUpdateYAxis(canvas, &y2);
@@ -344,5 +344,13 @@ void IupCdDrawFocusRect(Ihandle* ih, cdCanvas *canvas, int x1, int y1, int x2, i
   h = abs(y2 - y1) + 1;
 
   iupdrvPaintFocusRect(ih, gc, x, y, w, h);
+  */
+  int style = cdCanvasLineStyle(canvas, CD_QUERY);
+  long foreground = cdCanvasForeground(canvas, CD_QUERY);
+  cdCanvasLineStyle(canvas, CD_DOTTED);
+  cdCanvasForeground(canvas, CD_BLACK);
+  cdCanvasRect(canvas, x1, x2, y1, y2);
+  cdCanvasLineStyle(canvas, style);
+  cdCanvasForeground(canvas, foreground);
 }
 
